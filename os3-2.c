@@ -56,11 +56,11 @@ typedef struct {
 	unsigned char *references;
 	
 	pte *l1_pt; // ref_len * 4byte 크기
-	int allocated_frame_cnt;
-	int pagefault_cnt;
-	int references_cnt;
+	int allocated_frame_cnt; // 할당된 프레임 개수 카운트
+	int pagefault_cnt;		 // page fault 발생 카운트
+	int references_cnt;		 // 메모리 접근 횟수 카운트
 
-	int ref_index;
+	int ref_index;			 // references 배열에서 참조 중인 reference의 index
 } process;
 
 unsigned char *pas; // 물리 메모리
@@ -246,13 +246,7 @@ process* create_process(process *process_raw, unsigned char *references) {
 	// 1. L1 프레임 할당
 	allocate_frame_for_l1pt(new_process);
 
-	// 2. L1 PT 초기화
-	for (int i = 0; i < L1PT_SIZE; i++) {
-		new_process->l1_pt[i].frame = 0;
-		new_process->l1_pt[i].vflag = PAGE_INVALID;
-		new_process->l1_pt[i].ref = 0;
-		new_process->l1_pt[i].pad = 0;
-	}
+	// 2. L1 PT 초기화는 pas가 calloc을 통해 전부 0으로 초기화 되었기 때문에 따로 구현 불필요
 
 	return new_process;
 }
@@ -287,11 +281,30 @@ void read_binary() {
     }
 }
 
+void free_memory() {
+	for (int i = 0; i < pl_index; i++) {
+		process *process = process_list[i];
+		if (process !=  NULL && process->references != NULL) {
+			free(process->references);
+			process->references = NULL;
+		}
+
+		free(process);
+		process = NULL;
+	}
+
+	if (pas != NULL) {
+		free(pas);
+		pas = NULL;
+	}
+}
+
 int main() {
 	read_binary();
 	handle_memory_access();
 
 	print_result();
+	free_memory();
 
     return 0;
 }
