@@ -1,0 +1,13 @@
+** Process 000: Allocated Frames=013 PageFaults/References=005/008
+017 -> 024 REF=001
+050 -> 022 REF=001
+051 -> 019 REF=002
+052 -> 016 REF=002
+053 -> 021 REF=002
+** Process 001: Allocated Frames=013 PageFaults/References=005/007
+004 -> 018 REF=002
+005 -> 023 REF=001
+006 -> 020 REF=001
+007 -> 017 REF=002
+021 -> 025 REF=001
+Total: Allocated Frames=026 Page Faults/References=010/015

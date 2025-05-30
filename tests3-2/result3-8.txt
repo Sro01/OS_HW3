@@ -1,0 +1,18 @@
+Out of memory!!
+** Process 000: Allocated Frames=005 PageFaults/References=004/005
+(L1PT) 000 -> 003
+(L2PT) 004 -> 004 REF=003
+(L2PT) 006 -> 015 REF=001
+(L2PT) 007 -> 009 REF=001
+** Process 001: Allocated Frames=006 PageFaults/References=005/004
+(L1PT) 000 -> 005
+(L2PT) 000 -> 014 REF=001
+(L2PT) 001 -> 010 REF=001
+(L2PT) 002 -> 006 REF=001
+(L2PT) 006 -> 012 REF=001
+** Process 002: Allocated Frames=005 PageFaults/References=004/004
+(L1PT) 000 -> 007
+(L2PT) 001 -> 013 REF=002
+(L2PT) 004 -> 011 REF=001
+(L2PT) 007 -> 008 REF=001
+Total: Allocated Frames=016 Page Faults/References=013/013
